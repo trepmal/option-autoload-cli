@@ -30,6 +30,8 @@ class Option_Autoload extends WP_CLI_Command {
 
 		list( $option, $yn ) = $args;
 
+		wp_protect_special_option( $option );
+
 		global $wpdb;
 		$option_exists = $wpdb->get_var( $wpdb->prepare( "SELECT option_id from {$wpdb->options} where option_name = %s", $option ) );
 
