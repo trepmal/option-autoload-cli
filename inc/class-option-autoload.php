@@ -56,7 +56,6 @@ class Option_Autoload extends WP_CLI_Command {
 	 * <option>
 	 * : Name of option
 	 *
-	 *
 	 * ## EXAMPLES
 	 *
 	 *     wp option autoload get debug-thing
@@ -76,4 +75,40 @@ class Option_Autoload extends WP_CLI_Command {
 		echo $option_exists;
 
 	}
+
+	/**
+	 * Option Autoload
+	 *
+	 * ## OPTIONS
+	 *
+	 * [<yn>]
+	 * : yes or no
+	 * ---
+	 * default: yes
+	 * options:
+	 *   - yes
+	 *   - no
+	 * ---
+	 *
+	 * [--format=<format>]
+	 * : Format to use for the output. One of table, csv or json.
+	 *
+	 * ## EXAMPLES
+	 *
+	 *     wp option autoload list
+	 *
+	 * @subcommand list
+	 */
+	function list_( $args, $assoc_args ) {
+
+		list( $yn ) = $args;
+
+		global $wpdb;
+		$options = $wpdb->get_results( $wpdb->prepare( "SELECT option_name from {$wpdb->options} where autoload = %s", $yn ) );
+
+		$formatter = new \WP_CLI\Formatter( $assoc_args, array( 'option_name' ), 'autoloaded_options' );
+		$formatter->display_items( $options );
+
+	}
+
 }
