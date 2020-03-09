@@ -10,7 +10,7 @@ Recommended:
 
 ## Synopsis
 
-`wp option autoload <option> <yn>`
+`wp option autoload set <option> <yn>`
 
 ## Options
 
@@ -23,4 +23,4 @@ Recommended:
 
 ## Examples
 
-    wp option autoload debug-thing no
+    wp option autoload set debug-thing no

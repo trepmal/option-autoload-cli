@@ -24,9 +24,9 @@ class Option_Autoload extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp option autoload debug-thing no
+	 *     wp option autoload set debug-thing no
 	 */
-	function __invoke( $args, $assoc_args ) {
+	function set( $args, $assoc_args ) {
 
 		list( $option, $yn ) = $args;
 
@@ -41,6 +41,36 @@ class Option_Autoload extends WP_CLI_Command {
 
 		var_dump( $option_updated );
 
+		wp_cache_delete( 'alloptions', 'options' );
+
 	}
 
+	/**
+	 * Option Autoload
+	 *
+	 * ## OPTIONS
+	 *
+	 * <option>
+	 * : Name of option
+	 *
+	 *
+	 * ## EXAMPLES
+	 *
+	 *     wp option autoload get debug-thing
+	 */
+	function get( $args, $assoc_args ) {
+
+		list( $option ) = $args;
+
+		global $wpdb;
+		$option_exists = $wpdb->get_var( $wpdb->prepare( "SELECT autoload from {$wpdb->options} where option_name = %s", $option ) );
+
+		if ( false === $option_exists ) {
+			WP_CLI::error( "Option does not exist" );
+		}
+
+		var_dump( $option_exists );
+
+
+	}
 }
