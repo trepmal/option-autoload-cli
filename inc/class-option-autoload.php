@@ -1,11 +1,11 @@
 <?php
 /**
- * Scrub Posts
+ * Manage autoloaded options
  */
 class Option_Autoload extends WP_CLI_Command {
 
 	/**
-	 * Option Autoload
+	 * Set autoload for option
 	 *
 	 * ## OPTIONS
 	 *
@@ -49,7 +49,7 @@ class Option_Autoload extends WP_CLI_Command {
 	}
 
 	/**
-	 * Option Autoload
+	 * Get autoload for option
 	 *
 	 * ## OPTIONS
 	 *
@@ -77,7 +77,7 @@ class Option_Autoload extends WP_CLI_Command {
 	}
 
 	/**
-	 * Option Autoload
+	 * List all autoloaded (or not) options
 	 *
 	 * ## OPTIONS
 	 *
@@ -113,7 +113,7 @@ class Option_Autoload extends WP_CLI_Command {
 	}
 
 	/**
-	 * Option Autoload
+	 * Refresh alloptions cache
 	 *
 	 * ## OPTIONS
 	 *
