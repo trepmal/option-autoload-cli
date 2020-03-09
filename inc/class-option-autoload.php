@@ -33,7 +33,8 @@ class Option_Autoload extends WP_CLI_Command {
 		global $wpdb;
 		$option_exists = $wpdb->get_var( $wpdb->prepare( "SELECT option_id from {$wpdb->options} where option_name = %s", $option ) );
 
-		if ( false === $option_exists ) {
+		// var_dump( $option_exists );
+		if ( is_null( $option_exists ) ) {
 			WP_CLI::error( "Option does not exist" );
 		}
 
@@ -63,7 +64,7 @@ class Option_Autoload extends WP_CLI_Command {
 		global $wpdb;
 		$option_exists = $wpdb->get_var( $wpdb->prepare( "SELECT autoload from {$wpdb->options} where option_name = %s", $option ) );
 
-		if ( false === $option_exists ) {
+		if ( is_null( $option_exists ) ) {
 			WP_CLI::error( "Option does not exist" );
 		}
 
