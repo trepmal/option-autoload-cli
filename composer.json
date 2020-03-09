@@ -17,7 +17,10 @@
 		},
 		"bundled": true,
 		"commands": [
-			"option autoload"
+			"option autoload get",
+			"option autoload set",
+			"option autoload list",
+			"option autoload fresh"
 		]
 	},
 	"autoload": {

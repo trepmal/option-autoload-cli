@@ -5,17 +5,17 @@ WP-CLI: Change option autoload value
 
 [![Build Status](https://travis-ci.org/trepmal/option-autoload-cli.svg?branch=master)](https://travis-ci.org/trepmal/option-autoload-cli)
 
-Quick links: [Using](#using) | [Installing](#installing) | [Contributing](#contributing)
-
-## Using
-
-
 
 ## Installing
 
 Installing this package requires WP-CLI ^2.1 or greater. Update to the latest stable release with `wp cli update`.
 
 Once you've done so, you can install this package with `wp package install trepmal/option-autoload-cli`.
+
+
+## Using
+
+Run `wp help option autoload` to see subcommands.
 
 ## Contributing
 
@@ -45,7 +45,5 @@ Once you've decided to commit the time to seeing your pull request through, plea
 
 1. Create a feature branch for each contribution.
 2. Submit your pull request early for feedback.
-3. Include functional tests with your changes. [Read the WP-CLI documentation](https://wp-cli.org/docs/pull-requests/#functional-tests) for an introduction.
+3. Include functional tests with your changes. [Read the WP-CLI documentation](https://make.wordpress.org/cli/handbook/contributing/#creating-a-pull-request) for an introduction.
 4. Follow the [WordPress Coding Standards](http://make.wordpress.org/core/handbook/coding-standards/).
-
-*This README.md is generated dynamically from the project's codebase using `wp scaffold package-readme` ([doc](https://github.com/wp-cli/scaffold-package-command#wp-scaffold-package-readme)). To suggest changes, please submit a pull request against the corresponding part of the codebase.*
