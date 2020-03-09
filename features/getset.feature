@@ -16,6 +16,20 @@ Feature: Option Autoload
       no
       """
 
+    When I run `wp option autoload set home yes`
+    And I run `wp option autoload get home`
+    Then STDOUT should contain:
+      """
+      yes
+      """
+
+    When I try `wp option autoload set alloptions no`
+    Then STDERR should contain:
+      """
+      Error: alloptions is a protected WP option and may not be modified
+      """
+    And the return code should be 1
+
     When I try `wp option autoload set notanoption no`
     Then STDERR should contain:
       """
