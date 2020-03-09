@@ -16,6 +16,13 @@ Feature: Option Autoload
       no
       """
 
+    When I try `wp option autoload set home no`
+    Then STDERR should contain:
+      """
+      Error: Option autoload already set to no
+      """
+    And the return code should be 1
+
     When I run `wp option autoload set home yes`
     And I run `wp option autoload get home`
     Then STDOUT should contain:

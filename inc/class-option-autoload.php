@@ -33,18 +33,43 @@ class Option_Autoload extends WP_CLI_Command {
 		wp_protect_special_option( $option );
 
 		global $wpdb;
-		$option_exists = $wpdb->get_var( $wpdb->prepare( "SELECT option_id from {$wpdb->options} where option_name = %s", $option ) );
+		$option_autoload = $wpdb->get_var( $wpdb->prepare( "SELECT autoload from {$wpdb->options} where option_name = %s", $option ) );
 
-		if ( is_null( $option_exists ) ) {
+		if ( is_null( $option_autoload ) ) {
 			WP_CLI::error( "Option does not exist" );
+		}
+
+		if ( $option_autoload === $yn ) {
+			WP_CLI::error( sprintf( "Option autoload already set to %s", $yn ) );
 		}
 
 		$option_updated = $wpdb->get_results( $wpdb->prepare( "UPDATE {$wpdb->options} SET autoload = %s where option_name = %s", $yn, $option ) );
 
-		wp_cache_delete( 'alloptions', 'options' );
+		$check_option = $wpdb->get_var( $wpdb->prepare( "SELECT autoload from {$wpdb->options} where option_name = %s", $option ) );
 
-		// @todo make better :)
-		WP_CLI::success( 'Done.' );
+		if ( $check_option === $option_autoload ) {
+			WP_CLI::error( "Option not updated" );
+		}
+
+		$alloptions_before = wp_cache_get( 'alloptions', 'options' );
+		wp_cache_delete( 'alloptions', 'options' );
+		wp_load_alloptions(); // populate cache
+		$alloptions_after = wp_cache_get( 'alloptions', 'options' );
+
+		$cache_success = false;
+		switch ( $check_option ) {
+			case 'no' :
+				$cache_success = ( isset( $alloptions_before[ $option ] ) )  && ( ! isset( $alloptions_after[ $option ] ) );
+			break;
+			case 'yes' :
+				$cache_success = ( ! isset( $alloptions_before[ $option ] ) )  && ( isset( $alloptions_after[ $option ] ) );
+			break;
+		}
+
+		WP_CLI::success( sprintf(
+			'Autoload changed.%s',
+			WP_CLI::colorize( $cache_success ? ' Cache flushed.' : ' %rCache flush failed%n' )
+		) );
 
 	}
 
@@ -68,13 +93,13 @@ class Option_Autoload extends WP_CLI_Command {
 		list( $option ) = $args;
 
 		global $wpdb;
-		$option_exists = $wpdb->get_var( $wpdb->prepare( "SELECT autoload from {$wpdb->options} where option_name = %s", $option ) );
+		$option_autoload = $wpdb->get_var( $wpdb->prepare( "SELECT autoload from {$wpdb->options} where option_name = %s", $option ) );
 
-		if ( is_null( $option_exists ) ) {
+		if ( is_null( $option_autoload ) ) {
 			WP_CLI::error( "Option does not exist" );
 		}
 
-		WP_CLI::print_value( $option_exists, $assoc_args );
+		WP_CLI::print_value( $option_autoload, $assoc_args );
 
 	}
 
