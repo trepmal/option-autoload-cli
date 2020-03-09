@@ -112,4 +112,20 @@ class Option_Autoload extends WP_CLI_Command {
 
 	}
 
+	/**
+	 * Option Autoload
+	 *
+	 * ## OPTIONS
+	 *
+	 * ## EXAMPLES
+	 *
+	 *     wp option autoload refresh
+	 *
+	 */
+	function refresh( $args, $assoc_args ) {
+
+		WP_CLI::run_command( array( 'cache', 'delete', 'alloptions', 'options' ) );
+		return;
+
+	}
 }
