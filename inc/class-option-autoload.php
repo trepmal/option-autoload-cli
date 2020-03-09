@@ -15,10 +15,10 @@ class Option_Autoload extends WP_CLI_Command {
 	 * <yn>
 	 * : yes or no
 	 * ---
-     * default: no
-     * options:
-     *   - yes
-     *   - no
+	 * default: no
+	 * options:
+	 *   - yes
+	 *   - no
 	 * ---
 	 *
 	 *
@@ -38,8 +38,6 @@ class Option_Autoload extends WP_CLI_Command {
 		}
 
 		$option_updated = $wpdb->get_results( $wpdb->prepare( "UPDATE {$wpdb->options} SET autoload = %s where option_name = %s", $yn, $option ) );
-
-		var_dump( $option_updated );
 
 		wp_cache_delete( 'alloptions', 'options' );
 
@@ -69,8 +67,8 @@ class Option_Autoload extends WP_CLI_Command {
 			WP_CLI::error( "Option does not exist" );
 		}
 
-		var_dump( $option_exists );
-
+		// @todo, fancy output using --format flag
+		echo $option_exists;
 
 	}
 }
