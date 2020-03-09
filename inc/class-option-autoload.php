@@ -56,6 +56,9 @@ class Option_Autoload extends WP_CLI_Command {
 	 * <option>
 	 * : Name of option
 	 *
+	 * [--format=<format>]
+	 * : Format to use for the output. One of table, csv or json.
+	 *
 	 * ## EXAMPLES
 	 *
 	 *     wp option autoload get debug-thing
@@ -71,8 +74,7 @@ class Option_Autoload extends WP_CLI_Command {
 			WP_CLI::error( "Option does not exist" );
 		}
 
-		// @todo, fancy output using --format flag
-		echo $option_exists;
+		WP_CLI::print_value( $option_exists, $assoc_args );
 
 	}
 
