@@ -102,6 +102,7 @@ class Option_Autoload extends WP_CLI_Command {
 	function list_( $args, $assoc_args ) {
 
 		list( $yn ) = $args;
+		$yn = true === $yn ? 'yes' : $yn; // if <yn> isn't set, it becomes 'true' (not sure if bug?)
 
 		global $wpdb;
 		$options = $wpdb->get_results( $wpdb->prepare( "SELECT option_name from {$wpdb->options} where autoload = %s", $yn ) );
