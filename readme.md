@@ -1,26 +1,9 @@
-# Option Autoload
+# Option Autoload [![Build Status](https://travis-ci.org/trepmal/option-autoload-cli.svg?branch=master)](https://travis-ci.org/trepmal/option-autoload-cli)
 
-Change option autoload
-
+View or change 'autoload' setting for options.
 ## Installation
 
 Recommended:
 
 `wp package install trepmal/option-autoload-cli`
 
-## Synopsis
-
-`wp option autoload set <option> <yn>`
-
-## Options
-
-    <option>
-      Option name
-
-    <yn>
-      yes or no. Default: no
-
-
-## Examples
-
-    wp option autoload set debug-thing no
