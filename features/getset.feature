@@ -24,11 +24,14 @@ Feature: Get and Set Option Autoload
     And the return code should be 1
 
     When I run `wp option autoload set home yes`
-    And I run `wp option autoload get home`
+    And I run `wp option autoload get home --format=json`
     Then STDOUT should contain:
       """
-      yes
+      "yes"
       """
+
+  Scenario: Set invalid options and autoload values
+    Given a WP install
 
     When I try `wp option autoload set home invalid`
     Then STDERR should contain:
