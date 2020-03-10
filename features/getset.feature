@@ -30,6 +30,13 @@ Feature: Option Autoload
       yes
       """
 
+    When I try `wp option autoload set home invalid`
+    Then STDERR should contain:
+      """
+      Error: Invalid <yn>. Please specify 'yes' or 'no'.
+      """
+    And the return code should be 1
+
     When I try `wp option autoload set alloptions no`
     Then STDERR should contain:
       """

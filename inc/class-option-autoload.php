@@ -15,7 +15,6 @@ class Option_Autoload extends WP_CLI_Command {
 	 * <yn>
 	 * : yes or no
 	 * ---
-	 * default: no
 	 * options:
 	 *   - yes
 	 *   - no
@@ -24,11 +23,16 @@ class Option_Autoload extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp option autoload set debug-thing no
+	 *    # Set autoload value to 'no'for 'home'
+	 *    $ wp option autoload set home no
+	 *    Success: Autoload changed. Cache flushed.
+	 *
 	 */
 	function set( $args, $assoc_args ) {
 
 		list( $option, $yn ) = $args;
+
+		$yn = $this->validate_yn( $yn );
 
 		wp_protect_special_option( $option );
 
@@ -83,10 +87,26 @@ class Option_Autoload extends WP_CLI_Command {
 	 *
 	 * [--format=<format>]
 	 * : Format to use for the output. One of table, csv or json.
+	 * ---
+	 * default: table
+	 * options:
+	 *   - table
+	 *   - json
+	 *   - csv
+	 *   - yaml
+	 *   - count
+	 * ---
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp option autoload get debug-thing
+	 *    # Get autoload value for 'home'
+	 *    $ wp option autoload get home
+	 *    yes
+	 *
+	 *    # Get autoload value for 'home' as json
+	 *    $ wp option autoload get home --format=json
+	 *    "yes"
+	 *
 	 */
 	function get( $args, $assoc_args ) {
 
@@ -119,17 +139,35 @@ class Option_Autoload extends WP_CLI_Command {
 	 *
 	 * [--format=<format>]
 	 * : Format to use for the output. One of table, csv or json.
+	 * ---
+	 * default: table
+	 * options:
+	 *   - table
+	 *   - json
+	 *   - csv
+	 *   - yaml
+	 *   - count
+	 * ---
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp option autoload list
+	 *    # List all un-autoloaded options
+	 *    $ wp option autoload list no
+	 *    +-------------------+
+	 *    | option_name       |
+	 *    +-------------------+
+	 *    | moderation_keys   |
+	 *    | recently_edited   |
+	 *    | blacklist_keys    |
+	 *    | uninstall_plugins |
+	 *    +-------------------+
 	 *
 	 * @subcommand list
 	 */
 	function list_( $args, $assoc_args ) {
 
 		list( $yn ) = $args;
-		$yn = true === $yn ? 'yes' : $yn; // if <yn> isn't set, it becomes 'true' (not sure if bug?)
+		$yn = $this->validate_yn( $yn, 'yes' );
 
 		global $wpdb;
 		$options = $wpdb->get_results( $wpdb->prepare( "SELECT option_name from {$wpdb->options} where autoload = %s", $yn ) );
@@ -142,17 +180,38 @@ class Option_Autoload extends WP_CLI_Command {
 	/**
 	 * Refresh alloptions cache
 	 *
+	 * Alias to `wp cache delete alloptions options`
+	 *
 	 * ## OPTIONS
+	 *
+	 * none
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp option autoload refresh
+	 *    # Flush alloptions cache
+	 *    $ wp option autoload refresh
+	 *    Success: Object deleted.
 	 *
 	 */
 	function refresh( $args, $assoc_args ) {
 
 		WP_CLI::run_command( array( 'cache', 'delete', 'alloptions', 'options' ) );
-		return;
 
+	}
+
+	/**
+	 * Validate <yn> field
+	 *
+	 * The doc block restrictions don't work for positional arguments,
+	 * this validates the input value
+	 */
+	private function validate_yn( $yn, $default = false ) {
+		if ( 'yes' === $yn || 'no' === $yn ) {
+			return $yn;
+		}
+		if ( $default && true === $yn ) { // default for empty option parameter (e.g. `wp option autoload list`)
+			return $default;
+		}
+		WP_CLI::error( "Invalid <yn>. Please specify 'yes' or 'no'." );
 	}
 }
