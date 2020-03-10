@@ -169,12 +169,12 @@ class Option_Autoload extends WP_CLI_Command {
 		list( $yn ) = $args;
 		$yn = $this->validate_yn( $yn, 'yes' );
 
-		global $wpdb;
-		$options = $wpdb->get_results( $wpdb->prepare( "SELECT option_name from {$wpdb->options} where autoload = %s", $yn ) );
+		// option list uses on/off ¯\_(ツ)_/¯
+		$yn = $yn == 'yes' ? 'on' : 'off';
 
-		$formatter = new \WP_CLI\Formatter( $assoc_args, array( 'option_name' ), 'autoloaded_options' );
-		$formatter->display_items( $options );
+		WP_CLI::run_command( array( 'option', 'list' ), array( 'autoload' => $yn, 'fields' => 'option_name', 'format' => $assoc_args['format'] ) );
 
+		WP_CLI::log( "Try 'wp option list' for more control." );
 	}
 
 	/**
