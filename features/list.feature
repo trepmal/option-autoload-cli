@@ -1,6 +1,6 @@
-Feature: Option Autoload
+Feature: List autoloaded options
 
-  Scenario: Option Autoload
+  Scenario: List options based on autoload
     Given a WP install
 
     When I run `wp option autoload list`

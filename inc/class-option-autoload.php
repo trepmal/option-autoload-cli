@@ -40,11 +40,11 @@ class Option_Autoload extends WP_CLI_Command {
 		$option_autoload = $wpdb->get_var( $wpdb->prepare( "SELECT autoload from {$wpdb->options} where option_name = %s", $option ) );
 
 		if ( is_null( $option_autoload ) ) {
-			WP_CLI::error( "Option does not exist" );
+			WP_CLI::error( "Option does not exist." );
 		}
 
 		if ( $option_autoload === $yn ) {
-			WP_CLI::error( sprintf( "Option autoload already set to %s", $yn ) );
+			WP_CLI::error( sprintf( "Option autoload already set to '%s'.", $yn ) );
 		}
 
 		$option_updated = $wpdb->get_results( $wpdb->prepare( "UPDATE {$wpdb->options} SET autoload = %s where option_name = %s", $yn, $option ) );
@@ -52,7 +52,7 @@ class Option_Autoload extends WP_CLI_Command {
 		$check_option = $wpdb->get_var( $wpdb->prepare( "SELECT autoload from {$wpdb->options} where option_name = %s", $option ) );
 
 		if ( $check_option === $option_autoload ) {
-			WP_CLI::error( "Option not updated" );
+			WP_CLI::error( "Option not updated." );
 		}
 
 		$alloptions_before = wp_cache_get( 'alloptions', 'options' );
@@ -72,7 +72,7 @@ class Option_Autoload extends WP_CLI_Command {
 
 		WP_CLI::success( sprintf(
 			'Autoload changed.%s',
-			WP_CLI::colorize( $cache_success ? ' Cache flushed.' : ' %rCache flush failed%n' )
+			WP_CLI::colorize( $cache_success ? ' Cache flushed.' : ' %rCache flush failed.%n' )
 		) );
 
 	}
@@ -116,7 +116,7 @@ class Option_Autoload extends WP_CLI_Command {
 		$option_autoload = $wpdb->get_var( $wpdb->prepare( "SELECT autoload from {$wpdb->options} where option_name = %s", $option ) );
 
 		if ( is_null( $option_autoload ) ) {
-			WP_CLI::error( "Option does not exist" );
+			WP_CLI::error( "Option does not exist." );
 		}
 
 		WP_CLI::print_value( $option_autoload, $assoc_args );

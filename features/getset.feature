@@ -1,6 +1,6 @@
-Feature: Option Autoload
+Feature: Get and Set Option Autoload
 
-  Scenario: Option Autoload
+  Scenario: Get and Set Option Autoload
     Given a WP install
 
     When I run `wp option autoload get home`
@@ -19,7 +19,7 @@ Feature: Option Autoload
     When I try `wp option autoload set home no`
     Then STDERR should contain:
       """
-      Error: Option autoload already set to no
+      Error: Option autoload already set to 'no'.
       """
     And the return code should be 1
 
@@ -47,14 +47,14 @@ Feature: Option Autoload
     When I try `wp option autoload set notanoption no`
     Then STDERR should contain:
       """
-      Error: Option does not exist
+      Error: Option does not exist.
       """
     And the return code should be 1
 
     When I try `wp option autoload get notanoption`
     Then STDERR should contain:
       """
-      Error: Option does not exist
+      Error: Option does not exist.
       """
     And the return code should be 1
 
