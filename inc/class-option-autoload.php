@@ -63,10 +63,10 @@ class Option_Autoload extends WP_CLI_Command {
 		$cache_success = false;
 		switch ( $check_option ) {
 			case 'no' :
-				$cache_success = ( isset( $alloptions_before[ $option ] ) )  && ( ! isset( $alloptions_after[ $option ] ) );
+				$cache_success = ( isset( $alloptions_before[ $option ] ) ) && ( ! isset( $alloptions_after[ $option ] ) );
 			break;
 			case 'yes' :
-				$cache_success = ( ! isset( $alloptions_before[ $option ] ) )  && ( isset( $alloptions_after[ $option ] ) );
+				$cache_success = ( ! isset( $alloptions_before[ $option ] ) ) && ( isset( $alloptions_after[ $option ] ) );
 			break;
 		}
 
@@ -172,7 +172,7 @@ class Option_Autoload extends WP_CLI_Command {
 		// option list uses on/off ¯\_(ツ)_/¯
 		$yn = $yn == 'yes' ? 'on' : 'off';
 
-		WP_CLI::run_command( array( 'option', 'list' ), array( 'autoload' => $yn, 'fields' => 'option_name', 'format' => $assoc_args['format'] ) );
+		WP_CLI::run_command( [ 'option', 'list' ], [ 'autoload' => $yn, 'fields' => 'option_name', 'format' => $assoc_args['format'] ] );
 
 		WP_CLI::log( "Try 'wp option list' for more control." );
 	}
@@ -195,7 +195,7 @@ class Option_Autoload extends WP_CLI_Command {
 	 */
 	function refresh( $args, $assoc_args ) {
 
-		WP_CLI::run_command( array( 'cache', 'delete', 'alloptions', 'options' ) );
+		WP_CLI::run_command( [ 'cache', 'delete', 'alloptions', 'options' ] );
 
 	}
 
