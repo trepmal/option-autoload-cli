@@ -20,7 +20,7 @@
 			"option autoload get",
 			"option autoload set",
 			"option autoload list",
-			"option autoload fresh"
+			"option autoload refresh"
 		]
 	},
 	"autoload": {
