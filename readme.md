@@ -38,13 +38,13 @@ wp option autoload get <option> [--format=<format>]
 
 **EXAMPLES**
 
-   # Get autoload value for 'home'
-   $ wp option autoload get home
-   yes
+    # Get autoload value for 'home'
+    $ wp option autoload get home
+    yes
 
-   # Get autoload value for 'home' as json
-   $ wp option autoload get home --format=json
-   "yes"
+    # Get autoload value for 'home' as json
+    $ wp option autoload get home --format=json
+    "yes"
 
 
 
@@ -72,9 +72,9 @@ wp option autoload set <option> <yn>
 
 **EXAMPLES**
 
-   # Set autoload value to 'no'for 'home'
-   $ wp option autoload set home no
-   Success: Autoload changed. Cache flushed.
+    # Set autoload value to 'no'for 'home'
+    $ wp option autoload set home no
+    Success: Autoload changed. Cache flushed.
 
 
 
@@ -111,16 +111,16 @@ wp option autoload list [<yn>] [--format=<format>]
 
 **EXAMPLES**
 
-   # List all un-autoloaded options
-   $ wp option autoload list no
-   +-------------------+
-   | option_name       |
-   +-------------------+
-   | moderation_keys   |
-   | recently_edited   |
-   | blacklist_keys    |
-   | uninstall_plugins |
-   +-------------------+
+    # List all un-autoloaded options
+    $ wp option autoload list no
+    +-------------------+
+    | option_name       |
+    +-------------------+
+    | moderation_keys   |
+    | recently_edited   |
+    | blacklist_keys    |
+    | uninstall_plugins |
+    +-------------------+
 
 
 
@@ -140,9 +140,9 @@ none
 
 **EXAMPLES**
 
-   # Flush alloptions cache
-   $ wp option autoload refresh
-   Success: Object deleted.
+    # Flush alloptions cache
+    $ wp option autoload refresh
+    Success: Object deleted.
 
 ## Installing
 

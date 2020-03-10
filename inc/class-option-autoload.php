@@ -23,9 +23,9 @@ class Option_Autoload extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *    # Set autoload value to 'no'for 'home'
-	 *    $ wp option autoload set home no
-	 *    Success: Autoload changed. Cache flushed.
+	 *     # Set autoload value to 'no'for 'home'
+	 *     $ wp option autoload set home no
+	 *     Success: Autoload changed. Cache flushed.
 	 *
 	 */
 	function set( $args, $assoc_args ) {
@@ -99,13 +99,13 @@ class Option_Autoload extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *    # Get autoload value for 'home'
-	 *    $ wp option autoload get home
-	 *    yes
+	 *     # Get autoload value for 'home'
+	 *     $ wp option autoload get home
+	 *     yes
 	 *
-	 *    # Get autoload value for 'home' as json
-	 *    $ wp option autoload get home --format=json
-	 *    "yes"
+	 *     # Get autoload value for 'home' as json
+	 *     $ wp option autoload get home --format=json
+	 *     "yes"
 	 *
 	 */
 	function get( $args, $assoc_args ) {
@@ -151,16 +151,16 @@ class Option_Autoload extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *    # List all un-autoloaded options
-	 *    $ wp option autoload list no
-	 *    +-------------------+
-	 *    | option_name       |
-	 *    +-------------------+
-	 *    | moderation_keys   |
-	 *    | recently_edited   |
-	 *    | blacklist_keys    |
-	 *    | uninstall_plugins |
-	 *    +-------------------+
+	 *     # List all un-autoloaded options
+	 *     $ wp option autoload list no
+	 *     +-------------------+
+	 *     | option_name       |
+	 *     +-------------------+
+	 *     | moderation_keys   |
+	 *     | recently_edited   |
+	 *     | blacklist_keys    |
+	 *     | uninstall_plugins |
+	 *     +-------------------+
 	 *
 	 * @subcommand list
 	 */
@@ -188,9 +188,9 @@ class Option_Autoload extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *    # Flush alloptions cache
-	 *    $ wp option autoload refresh
-	 *    Success: Object deleted.
+	 *     # Flush alloptions cache
+	 *     $ wp option autoload refresh
+	 *     Success: Object deleted.
 	 *
 	 */
 	function refresh( $args, $assoc_args ) {
