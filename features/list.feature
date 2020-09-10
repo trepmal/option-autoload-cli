@@ -12,5 +12,5 @@ Feature: List autoloaded options
     When I run `wp option autoload list no`
     Then STDOUT should contain:
       """
-      blacklist_keys
+      moderation_keys
       """
